@@ -6,7 +6,7 @@ import { Label } from '@/components/ui/label';
 import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
 import AppLayout from '@/layouts/app-layout';
 import { type BreadcrumbItem } from '@/types';
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, useForm } from '@inertiajs/react';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
@@ -16,6 +16,25 @@ const breadcrumbs: BreadcrumbItem[] = [
 ];
 
 export default function ProductForm() {
+    const { data, setData, post, processing, errors, reset } = useForm(
+        {
+            name: '',
+            description: '',
+            price: '',
+            featured_image: null as File | null,
+        }
+    );
+
+    // Form submit handler
+    const submit = (e: React.FormEvent) => {
+        e.preventDefault();
+        post(route('products.store'), {
+            onSuccess: () => console.log('Product added successfully!'),
+
+        });
+    }
+
+    // console.log('data',data);
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Manage Products" />
@@ -24,34 +43,65 @@ export default function ProductForm() {
                     <Link as={'button'} className='bg-green-500 px-4 py-2 text-white rounded-lg text-md cursor-pointer hover:bg-green-700 w-fit' href={route('products.index')}>Back to Products</Link>
                 </div>
                 <Card>
-                    <CardHeader>  
+                    <CardHeader>
                         <CardTitle>Add New Product</CardTitle>
                     </CardHeader>
                     <CardContent>
-                        <form className="flex flex-col gap-4" autoComplete='off'>
+                        <form onSubmit={submit} className="flex flex-col gap-4" autoComplete='off'>
                             <div className="grid gap-6">
                                 {/* Product Name */}
                                 <div className="grid gap-2">
                                     <Label htmlFor="name">Product Name</Label>
-                                    <Input id='name' name='name' type='text' placeholder='Enter product name...' autoFocus tabIndex={1} />
+                                    <Input
+                                        value={data.name}
+                                        onChange={(e) => setData('name', e.target.value)}
+                                        id='name'
+                                        name='name'
+                                        type='text'
+                                        placeholder='Enter product name...'
+                                        autoFocus
+                                        tabIndex={1} />
                                 </div>
                                 {/* Product description */}
                                 <div className="grid gap-2">
                                     <Label htmlFor="description">Product Description</Label>
-                                    <CustomTextarea id='description' name='description' tabIndex={2} placeholder='Enter product description...' rows={3} />
+                                    <CustomTextarea
+                                        value={data.description}
+                                        onChange={(e) => setData('description', e.target.value)}
+                                        id='description'
+                                        name='description'
+                                        tabIndex={2}
+                                        placeholder='Enter product description...'
+                                        rows={3} />
                                 </div>
                                 {/* Product price */}
                                 <div className="grid gap-2">
                                     <Label htmlFor="price">Product Price</Label>
-                                    <Input id='price' name='price' type='text' placeholder='Enter product price...' autoFocus tabIndex={3} />
+                                    <Input
+                                        value={data.price}
+                                        onChange={(e) => setData('price', e.target.value)}
+                                        id='price'
+                                        name='price'
+                                        type='text'
+                                        placeholder='Enter product price...'
+                                        autoFocus
+                                        tabIndex={3} />
                                 </div>
                                 {/* Product featured image */}
                                 <div className="grid gap-2">
                                     <Label htmlFor="featured_image">Featured Image</Label>
-                                    <Input id='featured_image' name='featured_image' type='file' autoFocus tabIndex={4} />
+                                    <Input
+                                        id='featured_image'
+                                        name='featured_image'
+                                        type='file'
+                                        autoFocus
+                                        tabIndex={4} />
                                 </div>
                                 {/* Product submit */}
-                                <Button type="submit" className="mt-4 w-fit cursor-pointer" tabIndex={5}>
+                                <Button
+                                    type="submit"
+                                    className="mt-4 w-fit cursor-pointer"
+                                    tabIndex={5}>
                                     Add Product
                                 </Button>
                             </div>
