@@ -28,4 +28,23 @@ class ProductFormRequest extends FormRequest
             'featured_image' => ['nullable', 'image', 'max:4096'], // Max size 4MB
         ];
     }
+
+    /** 
+     * Custom messages for validation errors
+     * @return array<string, string>
+    */
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'The product name is required.',
+            'name.string' => 'The product name must be a string.',
+            'name.max' => 'The product name may not be greater than 255 characters.',
+            'description.string' => 'The product description must be a string.',
+            'price.required' => 'The product price is required.',
+            'price.numeric' => 'The product price must be a number.',
+            'price.min' => 'The product price must be at least 0.',
+            'featured_image.image' => 'The featured image must be an image file.',
+            'featured_image.max' => 'The featured image may not be larger than 4MB.',
+        ];
+    }
 }
