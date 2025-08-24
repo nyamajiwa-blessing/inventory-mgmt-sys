@@ -1,4 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import CustomTextarea from '@/components/ui/custom-textarea';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { PlaceholderPattern } from '@/components/ui/placeholder-pattern';
@@ -28,12 +29,12 @@ export default function ProductForm() {
                                 {/* Product Name */}
                                 <div className="grid gap-2">
                                     <Label htmlFor="name">Product Name</Label>
-                                    <Input id='name' name='name' type='text' placeholder='Enter product name' autoFocus tabIndex={1} />
+                                    <Input id='name' name='name' type='text' placeholder='Enter product name...' autoFocus tabIndex={1} />
                                 </div>
                                 {/* Product description */}
                                 <div className="grid gap-2">
-                                    <Label htmlFor="name">Product Name</Label>
-                                    <Input id='name' name='name' type='text' placeholder='Enter product name' autoFocus tabIndex={1} />
+                                    <Label htmlFor="description">Product Description</Label>
+                                    <CustomTextarea id='description' name='description' tabIndex={2} placeholder='Enter product description...' rows={4}/>
                                 </div>
                             </div>
                         </form>
