@@ -13,7 +13,7 @@ const mainNavItems: NavItem[] = [
         href: '/dashboard',
         icon: LayoutGrid,
     },
-
+    // Added "Manage Products" navigation item
     {
         title: 'Manage Products',
         href: '/products',
