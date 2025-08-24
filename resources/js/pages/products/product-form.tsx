@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import CustomTextarea from '@/components/ui/custom-textarea';
 import { Input } from '@/components/ui/input';
@@ -19,8 +20,11 @@ export default function ProductForm() {
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Manage Products" />
             <div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4 overflow-x-auto">
+                <div className='ml-auto'>
+                    <Link as={'button'} className='bg-green-500 px-4 py-2 text-white rounded-lg text-md cursor-pointer hover:bg-green-700 w-fit' href={route('products.index')}>Back to Products</Link>
+                </div>
                 <Card>
-                    <CardHeader>
+                    <CardHeader>  
                         <CardTitle>Add New Product</CardTitle>
                     </CardHeader>
                     <CardContent>
@@ -34,8 +38,22 @@ export default function ProductForm() {
                                 {/* Product description */}
                                 <div className="grid gap-2">
                                     <Label htmlFor="description">Product Description</Label>
-                                    <CustomTextarea id='description' name='description' tabIndex={2} placeholder='Enter product description...' rows={4}/>
+                                    <CustomTextarea id='description' name='description' tabIndex={2} placeholder='Enter product description...' rows={3} />
                                 </div>
+                                {/* Product price */}
+                                <div className="grid gap-2">
+                                    <Label htmlFor="price">Product Price</Label>
+                                    <Input id='price' name='price' type='text' placeholder='Enter product price...' autoFocus tabIndex={3} />
+                                </div>
+                                {/* Product featured image */}
+                                <div className="grid gap-2">
+                                    <Label htmlFor="featured_image">Featured Image</Label>
+                                    <Input id='featured_image' name='featured_image' type='file' autoFocus tabIndex={4} />
+                                </div>
+                                {/* Product submit */}
+                                <Button type="submit" className="mt-4 w-fit cursor-pointer" tabIndex={5}>
+                                    Add Product
+                                </Button>
                             </div>
                         </form>
                     </CardContent>
